@@ -38,4 +38,9 @@ public class DinerMenu implements Menu {
   public Iterator<MenuItem> createIterator() {
     return new DinerMenuIterator(menuItems);
   }
+
+  @Override
+  public String getMenuName() {
+    return "Diner menu";
+  }
 }

@@ -39,4 +39,9 @@ public class PancakeHouseMenu implements Menu {
   public Iterator<MenuItem> createIterator() {
     return menuItems.iterator();
   }
+
+  @Override
+  public String getMenuName() {
+    return "Pancake house menu";
+  }
 }
