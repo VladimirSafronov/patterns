@@ -1,25 +1,43 @@
 package state;
 
+import assistant.GumballMachineRemote;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 /**
  * Главный класс аппарата резиновых мячей
  */
-public class GumballMachine {
+public class GumballMachine extends UnicastRemoteObject implements GumballMachineRemote {
 
+  private static final long serialVersionUID = 2L;
   State hasQuarterState;
   State noQuarterState;
   State soldOutState;
   State soldState;
   State winnerState;
+  String location;
 
   State state;
   int ballsLeft;
 
-  public GumballMachine(int ballsLeft) {
+  public GumballMachine(int ballsLeft) throws RemoteException {
     this.hasQuarterState = new HasQuarterState(this);
     this.noQuarterState = new NoQuarterState(this);
     this.soldOutState = new SoldOutState(this);
     this.soldState = new SoldState(this);
     this.winnerState = new WinnerState(this);
+
+    this.state = ballsLeft > 0 ? noQuarterState : soldOutState;
+    this.ballsLeft = ballsLeft;
+  }
+
+  public GumballMachine(String location, int ballsLeft) throws RemoteException {
+    this.hasQuarterState = new HasQuarterState(this);
+    this.noQuarterState = new NoQuarterState(this);
+    this.soldOutState = new SoldOutState(this);
+    this.soldState = new SoldState(this);
+    this.winnerState = new WinnerState(this);
+    this.location = location;
 
     this.state = ballsLeft > 0 ? noQuarterState : soldOutState;
     this.ballsLeft = ballsLeft;
@@ -76,8 +94,19 @@ public class GumballMachine {
     return winnerState;
   }
 
+  @Override
   public int getBallsLeft() {
     return ballsLeft;
+  }
+
+  @Override
+  public String getLocation() {
+    return location;
+  }
+
+  @Override
+  public State getState() {
+    return state;
   }
 
   @Override
