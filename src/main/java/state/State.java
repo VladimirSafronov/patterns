@@ -1,9 +1,11 @@
 package state;
 
+import java.io.Serializable;
+
 /**
  * Интерфейс состояний автомата с мячиками
  */
-public interface State {
+public interface State extends Serializable {
 
   void insertQuarter();
 
