@@ -1,6 +1,6 @@
 package state;
 
-import assistant.GumballMachineRemote;
+import assistant.proxy.GumballMachineRemote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 

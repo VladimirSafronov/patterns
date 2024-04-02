@@ -1,4 +1,4 @@
-package assistant;
+package assistant.proxy;
 
 import java.rmi.RemoteException;
 
